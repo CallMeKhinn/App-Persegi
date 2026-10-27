@@ -4,52 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hitung Persegi</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Font Google: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        'neon-blue': '#00d2ff',
-                        'neon-green': '#00ff87',
-                        'card-blue': '#0d1b2a',
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
                     },
+                    colors: {
+                        'geo-sage-light': '#BEC5AD',
+                        'geo-sage': '#A4B494',
+                        'geo-emerald': '#519872',
+                        'geo-forest': '#3B5249',
+                        'geo-plum': '#34252F',
+                    },
+                    animation: {
+                        'fly-slow': 'flyEffect 6s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+                        'spin-slow': 'spinIcon 10s linear infinite',
+                    },
+                    keyframes: {
+                        flyEffect: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.6', transform: 'scale(1)' },
+                            '50%': { opacity: '0.9', transform: 'scale(1.05)' },
+                        },
+                        spinIcon: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' },
+                        }
+                    }
                 }
             }
         }
     </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .card-transition {
+                transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .geo-shadow {
+                box-shadow: 0 15px 35px -10px rgba(52, 37, 47, 0.2), 0 5px 15px -5px rgba(59, 82, 73, 0.15);
+            }
+            .backdrop-blur-md, .backdrop-blur-xl {
+                -webkit-backdrop-filter: blur(12px);
+                backdrop-filter: blur(12px);
+            }
+        }
+    </style>
 </head>
-<body class="bg-[#080c14] min-h-screen flex items-center justify-center text-slate-100 p-6 font-sans">
+<body class="bg-[#34252F] text-slate-100 min-h-screen font-sans selection:bg-[#519872] selection:text-white relative overflow-x-hidden flex items-center justify-center p-4 sm:p-6">
 
-    <div class="w-full max-w-2xl my-8">
+    <!-- Ambient Floating Background Blobs -->
+    <div class="fixed top-[-10%] left-[-10%] w-[450px] h-[450px] bg-[#519872]/20 rounded-full blur-[120px] pointer-events-none animate-pulse-glow"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-[#A4B494]/15 rounded-full blur-[140px] pointer-events-none animate-pulse-glow" style="animation-delay: 1.5s;"></div>
+
+    <main class="w-full max-w-2xl relative z-10 my-6">
         
-        <a href="/" class="inline-flex items-center gap-2 text-slate-400 hover:text-neon-blue transition-colors mb-6 text-sm font-medium">
-            ← Kembali ke Menu Utama
+        <!-- TOMBOL KEMBALI -->
+        <a href="/" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#3B5249]/60 border border-[#A4B494]/30 text-[#BEC5AD] text-sm font-semibold mb-6 card-transition hover:bg-[#519872] hover:text-white hover:border-[#519872] hover:-translate-x-1 backdrop-blur-md geo-shadow">
+            <svg class="w-4 h-4 stroke-current stroke-2" fill="none" viewBox="0 0 24 24">
+                <path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Kembali ke Menu Utama
         </a>
 
-        <!-- Main Input Card -->
-        <div class="bg-gradient-to-br from-card-blue to-[#0b172a] border border-white/10 p-8 rounded-3xl shadow-2xl mb-8">
+        <!-- MAIN INPUT CARD -->
+        <div class="rounded-3xl p-6 sm:p-8 border border-[#A4B494]/30 bg-gradient-to-b from-[#3B5249]/90 to-[#34252F]/95 backdrop-blur-xl geo-shadow animate-fly-slow mb-8">
             
-            <div class="flex items-center gap-4 mb-6">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-neon-blue/10 text-neon-blue border border-neon-blue/20">
-                    <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24">
+            <!-- HEADER FORM -->
+            <div class="flex items-center gap-4 mb-6 pb-6 border-b border-[#A4B494]/20">
+                <div class="w-14 h-14 rounded-2xl bg-[#519872]/20 border border-[#519872]/40 text-[#BEC5AD] flex items-center justify-center flex-shrink-0 animate-spin-slow">
+                    <svg class="w-7 h-7 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
                         <rect x="3" y="3" width="18" height="18" rx="3"/>
                     </svg>
                 </div>
                 <div>
-                    <h1 class="text-2xl font-extrabold text-white">Hitung Persegi</h1>
-                    <p class="text-slate-400 text-sm">Masukkan panjang sisi untuk menghitung luas & keliling</p>
+                    <span class="inline-block px-2.5 py-0.5 rounded-full bg-[#519872]/20 text-[#BEC5AD] text-[10px] font-bold tracking-wider uppercase border border-[#519872]/30 mb-1">
+                        Bangun Datar (2D)
+                    </span>
+                    <h1 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">Hitung Persegi</h1>
+                    <p class="text-[#BEC5AD]/80 text-xs sm:text-sm">Masukkan panjang sisi untuk menghitung luas & keliling</p>
                 </div>
             </div>
 
-            <!-- ACTION DIBUAT TETAP /Persegi -->
+            <!-- FORM INPUT -->
             <form action="/Persegi" method="POST" class="space-y-5">
                 @csrf
                 <div>
-                    <label for="sisi" class="block text-sm font-medium text-slate-300 mb-2">
+                    <label for="sisi" class="block text-xs font-bold text-[#BEC5AD] uppercase tracking-wider mb-2">
                         Masukkan Panjang Sisi Persegi (s):
                     </label>
                     <input 
@@ -60,14 +112,17 @@
                         value="{{ $sisi ?? '' }}"
                         placeholder="Contoh: 10" 
                         required 
-                        class="w-full px-4 py-3 bg-slate-900/80 border border-white/10 rounded-xl text-white focus:outline-none focus:border-neon-blue transition-all"
+                        class="w-full px-4 py-3 rounded-xl bg-[#34252F]/80 border border-[#A4B494]/30 text-white placeholder-[#BEC5AD]/40 focus:outline-none focus:border-[#519872] focus:ring-2 focus:ring-[#519872]/30 card-transition text-sm"
                     >
                 </div>
 
                 <button 
                     type="submit" 
-                    class="w-full py-3.5 bg-neon-blue text-slate-950 font-bold rounded-xl shadow-[0_0_20px_rgba(0,210,255,0.4)] hover:bg-cyan-300 transition-all"
+                    class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#519872] to-[#3B5249] border border-[#519872]/50 text-white text-sm font-bold tracking-wide shadow-lg card-transition hover:brightness-110 hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2"
                 >
+                    <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                        <path d="M9 7L14 12L9 17" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                     Hitung Sekarang
                 </button>
             </form>
@@ -75,46 +130,50 @@
 
         <!-- HASIL PERHITUNGAN TERPISAH -->
         @isset($luas)
-            <div class="space-y-6">
+            <div class="space-y-6 animate-fly-slow" style="animation-delay: 0.2s;">
                 
-                <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                    <span class="w-3 h-3 rounded-full bg-neon-blue animate-pulse"></span>
-                    Hasil Perhitungan Terpisah:
-                </h3>
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#519872] animate-ping"></span>
+                    <h3 class="text-base font-bold text-white uppercase tracking-wider">
+                        Hasil Perhitungan Terpisah
+                    </h3>
+                </div>
 
                 <!-- TABEL 1: LUAS -->
-                <div class="bg-gradient-to-br from-card-blue to-[#0b172a] border border-neon-blue/30 p-6 rounded-2xl shadow-xl">
-                    <div class="flex items-center justify-between mb-4">
-                        <h4 class="text-lg font-semibold text-neon-blue">📐 1. Perhitungan Luas Persegi</h4>
-                        <span class="text-xs bg-neon-blue/10 text-neon-blue border border-neon-blue/20 px-3 py-1 rounded-full font-mono">
-                            Rumus: sisi x sisi
+                <div class="rounded-2xl p-6 bg-gradient-to-br from-[#3B5249]/90 to-[#34252F]/90 border border-[#519872]/40 backdrop-blur-xl geo-shadow">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <h4 class="text-base font-bold text-white flex items-center gap-2">
+                            <span>📐</span> 1. Perhitungan Luas Persegi
+                        </h4>
+                        <span class="text-xs bg-[#519872]/20 text-[#BEC5AD] border border-[#519872]/30 px-3 py-1 rounded-full font-mono">
+                            Rumus: s × s
                         </span>
                     </div>
 
-                    <div class="overflow-hidden rounded-xl border border-white/10 bg-slate-900/60">
+                    <div class="overflow-x-auto rounded-xl border border-[#A4B494]/20 bg-[#34252F]/60">
                         <table class="w-full text-left text-sm">
-                            <thead class="bg-white/5 text-slate-300 border-b border-white/10">
+                            <thead class="bg-[#3B5249]/50 text-[#BEC5AD] border-b border-[#A4B494]/20">
                                 <tr>
                                     <th class="py-3 px-4 font-semibold">Langkah / Komponen</th>
                                     <th class="py-3 px-4 font-semibold text-right">Nilai / Keterangan</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-white/5 text-slate-300">
+                            <tbody class="divide-y divide-[#A4B494]/10 text-slate-200">
                                 <tr>
-                                    <td class="py-3 px-4 text-slate-400">Panjang Sisi (s)</td>
+                                    <td class="py-3 px-4 text-[#BEC5AD]/80">Panjang Sisi (s)</td>
                                     <td class="py-3 px-4 text-right font-medium text-white">{{ $sisi }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="py-3 px-4 text-slate-400">Rumus Luas Persegi</td>
-                                    <td class="py-3 px-4 text-right font-mono text-neon-blue">sisi x sisi</td>
+                                    <td class="py-3 px-4 text-[#BEC5AD]/80">Rumus Luas Persegi</td>
+                                    <td class="py-3 px-4 text-right font-mono text-[#519872]">sisi × sisi</td>
                                 </tr>
                                 <tr>
-                                    <td class="py-3 px-4 text-slate-400">Proses Perhitungan</td>
-                                    <td class="py-3 px-4 text-right font-mono text-slate-300">{{ $sisi }} x {{ $sisi }}</td>
+                                    <td class="py-3 px-4 text-[#BEC5AD]/80">Proses Perhitungan</td>
+                                    <td class="py-3 px-4 text-right font-mono text-slate-300">{{ $sisi }} × {{ $sisi }}</td>
                                 </tr>
-                                <tr class="bg-neon-blue/10">
-                                    <td class="py-3.5 px-4 font-bold text-neon-blue">Hasil Luas Persegi</td>
-                                    <td class="py-3.5 px-4 text-right font-extrabold text-neon-blue text-lg">{{ $luas }}</td>
+                                <tr class="bg-[#519872]/20 font-bold">
+                                    <td class="py-3.5 px-4 text-[#BEC5AD]">Hasil Luas Persegi</td>
+                                    <td class="py-3.5 px-4 text-right text-white text-lg font-extrabold">{{ $luas }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -123,38 +182,40 @@
 
                 <!-- TABEL 2: KELILING -->
                 @isset($keliling)
-                    <div class="bg-gradient-to-br from-[#0a251e] to-[#061e18] border border-neon-green/30 p-6 rounded-2xl shadow-xl">
-                        <div class="flex items-center justify-between mb-4">
-                            <h4 class="text-lg font-semibold text-neon-green">🔄 2. Perhitungan Keliling Persegi</h4>
-                            <span class="text-xs bg-neon-green/10 text-neon-green border border-neon-green/20 px-3 py-1 rounded-full font-mono">
-                                Rumus: 4 x sisi
+                    <div class="rounded-2xl p-6 bg-gradient-to-br from-[#3B5249]/90 to-[#34252F]/90 border border-[#A4B494]/40 backdrop-blur-xl geo-shadow">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                            <h4 class="text-base font-bold text-white flex items-center gap-2">
+                                <span>🔄</span> 2. Perhitungan Keliling Persegi
+                            </h4>
+                            <span class="text-xs bg-[#A4B494]/20 text-[#BEC5AD] border border-[#A4B494]/30 px-3 py-1 rounded-full font-mono">
+                                Rumus: 4 × s
                             </span>
                         </div>
 
-                        <div class="overflow-hidden rounded-xl border border-white/10 bg-slate-900/60">
+                        <div class="overflow-x-auto rounded-xl border border-[#A4B494]/20 bg-[#34252F]/60">
                             <table class="w-full text-left text-sm">
-                                <thead class="bg-white/5 text-slate-300 border-b border-white/10">
+                                <thead class="bg-[#3B5249]/50 text-[#BEC5AD] border-b border-[#A4B494]/20">
                                     <tr>
                                         <th class="py-3 px-4 font-semibold">Langkah / Komponen</th>
                                         <th class="py-3 px-4 font-semibold text-right">Nilai / Keterangan</th>
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-white/5 text-slate-300">
+                                <tbody class="divide-y divide-[#A4B494]/10 text-slate-200">
                                     <tr>
-                                        <td class="py-3 px-4 text-slate-400">Panjang Sisi (s)</td>
+                                        <td class="py-3 px-4 text-[#BEC5AD]/80">Panjang Sisi (s)</td>
                                         <td class="py-3 px-4 text-right font-medium text-white">{{ $sisi }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="py-3 px-4 text-slate-400">Rumus Keliling Persegi</td>
-                                        <td class="py-3 px-4 text-right font-mono text-neon-green">4 x sisi</td>
+                                        <td class="py-3 px-4 text-[#BEC5AD]/80">Rumus Keliling Persegi</td>
+                                        <td class="py-3 px-4 text-right font-mono text-[#A4B494]">4 × sisi</td>
                                     </tr>
                                     <tr>
-                                        <td class="py-3 px-4 text-slate-400">Proses Perhitungan</td>
-                                        <td class="py-3 px-4 text-right font-mono text-slate-300">4 x {{ $sisi }}</td>
+                                        <td class="py-3 px-4 text-[#BEC5AD]/80">Proses Perhitungan</td>
+                                        <td class="py-3 px-4 text-right font-mono text-slate-300">4 × {{ $sisi }}</td>
                                     </tr>
-                                    <tr class="bg-neon-green/10">
-                                        <td class="py-3.5 px-4 font-bold text-neon-green">Hasil Keliling Persegi</td>
-                                        <td class="py-3.5 px-4 text-right font-extrabold text-neon-green text-lg">{{ $keliling }}</td>
+                                    <tr class="bg-[#A4B494]/20 font-bold">
+                                        <td class="py-3.5 px-4 text-[#BEC5AD]">Hasil Keliling Persegi</td>
+                                        <td class="py-3.5 px-4 text-right text-white text-lg font-extrabold">{{ $keliling }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -165,7 +226,7 @@
             </div>
         @endisset
 
-    </div>
+    </main>
 
 </body>
 </html>
