@@ -32,12 +32,18 @@ class HitungController extends Controller
             'keliling' => $keliling,
         ]);
     }
-
     public function Lingkaran(Request $data)
     {
         $jari_jari = $data->jari_jari;
-        $luas = pi() * $jari_jari * $jari_jari;
-        $keliling = 2 * pi() * $jari_jari;
+
+        if ($jari_jari % 7 == 0) {
+            $pi = 22 / 7;
+        } else {
+            $pi = 3.14;
+        }
+
+        $luas = $pi * $jari_jari * $jari_jari;
+        $keliling = 2 * $pi * $jari_jari;
 
         return view('Lingkaran')->with([
             'luas' => $luas,
@@ -45,7 +51,6 @@ class HitungController extends Controller
             'keliling' => $keliling,
         ]);
     }
-
     public function Segitiga(Request $data)
     {
         $alas = $data->alas;
@@ -62,8 +67,16 @@ class HitungController extends Controller
     {
         $jari_jari = $data->jari_jari;
         $tinggi = $data->tinggi;
-        $luas = (pi() * $jari_jari * ($jari_jari + sqrt(($tinggi * $tinggi) + ($jari_jari * $jari_jari))));
-        $volume = (1/3) * pi() * ($jari_jari * $jari_jari) * $tinggi;
+
+        if ($jari_jari % 7 == 0) {
+            $pi = 22 / 7;
+        } else {
+            $pi = 3.14;
+        }
+
+        $s = sqrt(($tinggi * $tinggi) + ($jari_jari * $jari_jari));
+        $luas = $pi * $jari_jari * ($jari_jari + $s);
+        $volume = (1 / 3) * $pi * ($jari_jari * $jari_jari) * $tinggi;
 
         return view('Kerucut')->with([
             'luas' => $luas,
@@ -76,8 +89,15 @@ class HitungController extends Controller
     {
         $jari_jari = $data->jari_jari;
         $tinggi = $data->tinggi;
-        $luas = (2 * pi() * $jari_jari * ($jari_jari + $tinggi));
-        $volume = pi() * ($jari_jari * $jari_jari) * $tinggi;
+
+        if ($jari_jari % 7 == 0) {
+            $pi = 22 / 7;
+        } else {
+            $pi = 3.14;
+        }
+
+        $luas = 2 * $pi * $jari_jari * ($jari_jari + $tinggi);
+        $volume = $pi * ($jari_jari * $jari_jari) * $tinggi;
 
         return view('Tabung')->with([
             'luas' => $luas,
@@ -90,7 +110,9 @@ class HitungController extends Controller
     {
         $luas_alas = $data->luas_alas;
         $tinggi = $data->tinggi;
-        $luas = (2 * $luas_alas) + ($data->keliling_alas * $tinggi);
+        $keliling_alas = $data->keliling_alas ?? 0;
+
+        $luas = (2 * $luas_alas) + ($keliling_alas * $tinggi);
         $volume = $luas_alas * $tinggi;
 
         return view('Prisma')->with([
@@ -98,7 +120,6 @@ class HitungController extends Controller
             'volume' => $volume,
             'luas_alas' => $luas_alas,
             'tinggi' => $tinggi,
-            'keliling_alas' => $data->keliling_alas,
         ]);
     }
 }

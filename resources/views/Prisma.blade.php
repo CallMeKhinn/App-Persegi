@@ -114,11 +114,11 @@
                 </div>
 
                 <div>
-                    <label for="jari_jari" class="block text-xs font-bold text-[#BEC5AD] uppercase tracking-wider mb-2">
-                        Masukkan Jari-jari (r)
+                    <label for="luas_alas" class="block text-xs font-bold text-[#BEC5AD] uppercase tracking-wider mb-2">
+                        Masukkan Luas Alas (la)
                     </label>
                     <div class="relative">
-                        <input type="number" step="any" id="jari_jari" name="jari_jari" value="{{ $jari_jari ?? '' }}" required placeholder="Contoh: 7" 
+                        <input type="number" step="any" id="luas_alas" name="luas_alas" value="{{ $luas_alas ?? '' }}" required placeholder="Contoh: 24" 
                             class="w-full px-4 py-3 rounded-xl bg-[#34252F]/80 border border-[#A4B494]/30 text-white placeholder-[#BEC5AD]/40 focus:outline-none focus:border-[#519872] focus:ring-2 focus:ring-[#519872]/30 card-transition text-sm">
                     </div>
                 </div>
@@ -146,8 +146,8 @@
                             <span class="text-base font-bold text-white">{{ $tinggi ?? '-' }}</span>
                         </div>
                         <div class="p-3 rounded-xl bg-[#34252F]/60 border border-[#A4B494]/20">
-                            <span class="block text-[10px] text-[#BEC5AD]/70 uppercase font-semibold">Jari-jari (r)</span>
-                            <span class="text-base font-bold text-white">{{ $jari_jari ?? '-' }}</span>
+                            <span class="block text-[10px] text-[#BEC5AD]/70 uppercase font-semibold">Luas Alas (la)</span>
+                            <span class="text-base font-bold text-white">{{ $luas_alas ?? '-' }}</span>
                         </div>
                     </div>
 
@@ -155,7 +155,7 @@
                     <div class="space-y-3">
                         <div class="p-4 rounded-2xl bg-[#519872]/20 border border-[#519872]/40 flex items-center justify-between">
                             <div>
-                                <span class="block text-xs text-[#BEC5AD] font-semibold">Luas Prisma</span>
+                                <span class="block text-xs text-[#BEC5AD] font-semibold">Luas Permukaan Prisma</span>
                                 <span class="text-xs text-[#BEC5AD]/60 font-mono">(2 × Luas Alas) + (Keliling Alas × t)</span>
                             </div>
                             <span class="text-xl sm:text-2xl font-extrabold text-white">{{ $luas }}</span>
