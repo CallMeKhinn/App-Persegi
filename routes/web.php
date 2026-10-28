@@ -46,3 +46,5 @@ Route::post('/Segitiga', [HitungController::class,'Segitiga']);
 Route::post('/Kerucut', [HitungController::class, 'Kerucut']);
 
 Route::post('/Tabung', [HitungController::class,'Tabung']);
+
+Route::post('/Prisma', [HitungController::class,'Prisma']);
